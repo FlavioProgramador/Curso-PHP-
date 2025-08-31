@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="recursos/css/estilo.css">
-    <link rel="stylesheet" href="recursos/css/exercicio.css">
+
+    <?php if (empty($_GET['semcss'])): ?>
+        <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="recursos/css/estilo.css">
+        <link rel="stylesheet" href="recursos/css/exercicio.css">
+    <?php endif; ?>
+
     <title>Exercício</title>
 </head>
 <body class="exercicio">
@@ -12,18 +16,29 @@
         <h1>Curso PHP</h1>
         <h2>Visualização do Exercício</h2>
     </header>
+
     <nav class="navegacao">
-        <a href=<?= "/{$_GET['dir']}/{$_GET['file']}.php" ?> 
-            class="verde">Sem formatação</a>
+        <a href="<?= "?dir={$_GET['dir']}&file={$_GET['file']}&semcss=1" ?>" class="verde">Sem formatação</a>
         <a href="index.php" class="vermelho">Voltar</a>
     </nav>
+
     <main class="principal">
         <div class="conteudo">
             <?php
-                include(__DIR__ . "/{$_GET['dir']}/{$_GET['file']}.php");
+                if (!empty($_GET['dir']) && !empty($_GET['file'])) {
+                    $arquivo = __DIR__ . "/{$_GET['dir']}/{$_GET['file']}.php";
+                    if (file_exists($arquivo)) {
+                        include($arquivo);
+                    } else {
+                        echo "<p>Arquivo não encontrado!</p>";
+                    }
+                } else {
+                    echo "<p>Parâmetros inválidos!</p>";
+                }
             ?>
         </div>
     </main>
+
     <footer class="rodape">
         COD3R & ALUNOS © <?= date('Y'); ?>
     </footer>
