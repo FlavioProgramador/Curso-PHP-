@@ -1,0 +1,14 @@
+<div class="titulo">Olá PHP </div>
+
+<h2>Exemplo A</h2>
+<?php
+echo 'Olá ';
+echo 'Mundo!';
+?>
+
+<h2>Exemplo B</h2>
+<?= "Outra forma de me 'expressar'! " ?> <!-- tag de impressão rápida -->
+<?= 1 + 3 ?> <!-- tag de impressão rápida -->
+
+<!-- <?php
+phpinfo(); // mostra várias informações do PHP -->
